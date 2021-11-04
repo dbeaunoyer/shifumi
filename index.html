@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Roche Papier Ciseaux</title>
+  </head>
+  <body>
+    <button>Roche</button>
+    <button>Papier</button>
+    <button>Ciseaux</button>
+    <div class="result"></div>
+    <script>
+      const buttons = document.querySelectorAll("button");
+      //console.log(buttons);
+
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", function () {
+          const choixDeLutilisateur = buttons[i].innerHTML;
+          //console.log(choixDeLutisateur);
+          const numeroHasard = Math.floor(Math.random() * buttons.length);
+          const choixDuRobot = buttons[numeroHasard].innerHTML;
+          //console.log(`${choixDeLutisateur} VS ${choixDuRobot}`);
+          /* Logique */
+          var result = "";
+          if (choixDeLutilisateur === choixDuRobot) {
+            result = "Egalité";
+          } else if (
+            //La roche bat ciseaux
+            (choixDeLutilisateur === "Roche" && choixDuRobot === "Ciseaux") ||
+            //La roche se fait battre par le papier
+            (choixDeLutilisateur === "Papier" && choixDuRobot === "Roche") ||
+            //le papier se fait battre par des ciseaux
+            (choixDeLutilisateur === "Ciseaux" && choixDuRobot === "Papier")
+          ) {
+            result = "Gagné";
+          } else {
+            result = "Perdu";
+          }
+
+          document.querySelector(".result").innerHTML = `
+            Joueur: ${choixDeLutilisateur} <br/>
+            Robot: ${choixDuRobot} <br/>
+            ${result} !
+        `;
+        });
+      }
+    </script>
+  </body>
+</html>
